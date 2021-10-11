@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h1>write</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3 mt-4">
+            <label for="exampleInputEmail1" class="form-label">subject</label>
+            <input type="text" name="subject" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        
+        <div class="mb-3 mt-4">
+            <label for="exampleInputEmail1" class="form-label">writer</label>
+            <input type="text" value="{{user.username}}" disable class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+               
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Content</label>
+            <textarea name="content" class="form-control"></textarea>
+        </div>
+     
+        <div class="text-end mt-3">
+            <button type="submit" class="btn btn-primary">Signup</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

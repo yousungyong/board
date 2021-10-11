@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div >
+        <img src="{{request.user.pic.url}}" class="rounded-circle" height="200">
+    </div>
+    
+    <div class="mb-3 mt-4">
+        <label for="exampleInputEmail1" class="form-label">username</label>
+        <input type="text" name="username" value="{{user.username}}" disabled class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">nickname</label>
+        <input type="text" name="nickname" value="{{user.nickname}}" disabled class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>        
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">age</label>
+        <input type="number" name="age" value="{{user.age}}" disabled class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>        
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">comment</label>
+        <textarea name="comment" disabled class="form-control"> {{user.comment}}</textarea>
+    </div>
+    <div class="text-end mt-3">
+        <a href="{% url 'acc:update' %}"><button type="submit" class="btn btn-primary">profile edit</button></a>
+        <a href="{% url 'acc:delete' %}"><button type="submit" class="btn btn-danger">delete</button></a>
+    </div>
+
+</div>
+{% endblock %}

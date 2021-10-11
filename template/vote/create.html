@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h1>Topic</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3 mt-4">
+            <label for="exampleInputEmail1" class="form-label">Topic Title</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+        
+        <div class="mb-3 mt-4">
+            <label for="exampleInputEmail1" class="form-label">Writer</label>
+            <input type="text" value="{{user.username}}" disable class="form-control" >
+        </div>
+               
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Comment</label>
+            <textarea name="comment" class="form-control"></textarea>
+        </div>
+        
+        <hr>
+        <div class="mt-3">
+            <button type="button" onclick="create()" class="btn btn-dark">보기생성</button>
+        </div>
+        <div id="here">
+
+        </div>
+        <hr>
+
+        <div class="text-end mt-3">
+            <button type="submit" class="btn btn-primary">글 작성</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function create(){
+        div = document.getElementById("here")
+        p = document.createElement("p")
+        p.innerHTML = '<div class="mb-3 mt-4"><label for="exampleInputEmail1" class="form-label">보기이름</label><input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></div> <div class="mb-5 mt-4"><label for="exampleInputEmail1" class="form-label">보기사진</label><input type="file" name="pic" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></div>'
+        div.appendChild(p)
+    }
+</script>
+{% endblock %}

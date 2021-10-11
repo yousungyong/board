@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h1>BOARD</h1>
+    <div class="text-end mt-3">
+        {% if user in con.up.all %}
+            <a href="{% url 'board:up' con.id 'cancel' %}"><button type="submit" class="bnt btn-danger">좋아요취소</button></a>
+        {% else %}
+            <a href="{% url 'board:up' con.id 'up' %}"><button type="submit" class="bnt btn-primary">좋아요</button></a>
+        {% endif %}
+    </div>
+    <div class="mb-3 mt-4">
+        <label for="exampleInputEmail1" class="form-label">Subject</label>
+        <input type="text" value="{{con.subject}}" disabled class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Writer</label>
+        <input type="text" disabled value="{{con.writer}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>        
+    
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">content</label>
+        <textarea disabled class="form-control">{{con.content}}</textarea>
+    </div>
+    <div class="text-end mt-3">
+        {% if user.username == con.writer %}
+            <a href="{% url 'board:delete' con.id %}"><button type="submit" class="bnt btn-primary">delete</button></a>
+            <a href="{% url 'board:update' con.id %}"><button type="submit" class="bnt btn-primary">edit</button></a>
+            <a href="{% url 'board:index' %}"><button type="submit" class="bnt btn-primary">list</button></a>
+        {% else %}
+            <a href="{% url 'board:index' %}"><button type="submit" class="bnt btn-primary">list</button></a>
+        {% endif %}
+    </div>
+
+    <h3>댓글</h3>
+
+    <hr>
+
+    {% for i in rep %}
+        <div class="row mb-3" height="150px">
+            <div class="col-lg-3 text-center">
+                <img src="{{ i.replyer_pic.url }}" class="rounded-circle" height="150px">
+            </div>
+            <div class="col-lg-9">
+                <span style="font-weight: bold; font-size: 30px;">{{ i.replyer }}</span>
+                <span style="float: right">
+                    <a href="{% url 'board:agree' i.id con.id %}"><button class="btn-primary">공감</button></a>
+                </span>
+                <textarea class="form-control" disabled>{{ i.comment }}</textarea>
+            </div>
+        </div>
+    {% endfor %}
+
+    
+    
+    <form method="POST" action="{% url 'board:create_reply' con.id %}">
+        {% csrf_token %}
+        <div class="row text-center">
+            <div class="col-lg-10">
+                <textarea name="comment" class="form-control"></textarea>
+            </div>
+            <div class="col-lg-2">
+                <button class="btn btn-success">답변등록</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

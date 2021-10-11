@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1>TRANSLATOR</h1>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-5">
+                <h4>번역전</h4>
+                <textarea name="content" placeholder="번역할 내용을 입력해주세요" class="form-control" style="height: 300px">{{t}}</textarea>
+            </div>
+            <div class="col-lg-2 text-center" style="margin: auto;">
+                <p>
+                    Form
+                    <select name="from">
+                        <option value="ko" {% if from == 'ko' %}selected{% endif %}>korean</option>
+                        <option value="en" {% if from == 'en' %}selected{% endif %}>english</option>
+                        <option value="ja" {% if from == 'ja' %}selected{% endif %}>japaness</option>
+                    </select>
+                </p>
+                <p>
+                    To   
+                    <select name="to">
+                        <option value="ko" {% if to == 'ko' %}selected{% endif %}>korean</option>
+                        <option value="en" {% if to == 'en' %}selected{% endif %}>english</option>
+                        <option value="ja" {% if to == 'ja' %}selected{% endif %}>japaness</option>
+                    </select>
+                </p>
+                <p><button class="btn btn-secondary">Translate</button></p>
+            </div>
+            <div class="col-lg-5">
+                <h4>번역후</h4>
+                <textarea disabled placeholder="" class="form-control" style="height: 300px">{{con}}</textarea>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

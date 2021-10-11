@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 md-5">
+    내가 참여한 투표는
+    {% for i in user.topic_set.all %}
+        <p>{{ i.title }}</p>
+    {% endfor %}
+    <h1>투표광장</h1>
+    <div class="text-end">
+        <a href="{% url 'vote:create' %}"><button class="btn btn-success"> + TOPIC </button></a>
+    </div>
+    {% for i in con %}
+    <div class="card mt-3 mt-3">
+        {% if user in i.voter.all %}
+            <div class="card-header" style="background-color: rgb(106, 165, 233);">
+                Voted
+            </div>
+        {% else %}
+            <div class="card-header">
+                Not Voted
+            </div>
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{i.title}}</h5>
+            <p class="card-text">{{i.comment}}</p>
+            <a href="{% url 'vote:detail' i.id %}" class="btn btn-outline-primary">
+                {% if user in i.voter.all %}
+                    결과
+                {% else %}
+                    VOTE
+                {% endif %}
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

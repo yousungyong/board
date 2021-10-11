@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h1>profile update</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3 mt-4">
+            <label for="exampleInputEmail1" class="form-label">username</label>
+            <input type="text" disabled value={{user.username}} name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">nickname</label>
+            <input type="text" name="nickname" value={{user.nickname}} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>        
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">age</label>
+            <input type="number" name="age" value={{user.age}} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>        
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">comment</label>
+            <textarea name="comment" class="form-control">{{user.comment}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Image</label>
+            <input type="file" name="image" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="text-end mt-3">
+            <button type="submit" class="btn btn-primary">update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
